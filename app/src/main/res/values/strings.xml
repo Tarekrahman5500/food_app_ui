@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">Food Order UI</string>
+    <string name="food_app">Food App</string>
+    <string name="todo">TODO</string>
+    <string name="foodator">Foodator</string>
+    <string name="get_start">Get Start</string>
+    <string name="order_amp_eat"><![CDATA[Order & Eat]]></string>
+    <string name="hi_user">Hi User</string>
+    <string name="july_1_aug_10">July 1 - Aug 10</string>
+    <string name="free_delivery">Free Delivery</string>
+    <string name="find_your_food">Find Your Food</string>
+    <string name="order_now">Order Now</string>
+    <string name="categories">Categories</string>
+    <string name="popular">Popular</string>
+</resources>
