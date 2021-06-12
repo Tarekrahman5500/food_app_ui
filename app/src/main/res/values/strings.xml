@@ -12,4 +12,5 @@
     <string name="order_now">Order Now</string>
     <string name="categories">Categories</string>
     <string name="popular">Popular</string>
+    <string name="home">Home</string>
 </resources>

@@ -12,4 +12,5 @@
     <color name="OrangeLite">#ff5e00</color>
     <color name="LogoText">#3d33a8</color>
     <color name="PrimaryColorVariant">#afafaf</color>
+    <color name="ItemColor">#6e6e70</color>
 </resources>

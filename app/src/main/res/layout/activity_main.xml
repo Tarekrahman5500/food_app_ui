@@ -5,6 +5,8 @@
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
         tools:context=".MainActivity">
     <ScrollView
             android:id="@+id/scrollView"
@@ -12,11 +14,11 @@
             android:layout_height="match_parent" app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent">
-        <LinearLayout android:layout_width="match_parent" android:layout_height="500dp"
-                      android:orientation="vertical">
+        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+                      android:orientation="vertical" android:paddingBottom="90dp">
             <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
-                    android:layout_height="900dp">
+                    android:layout_height="wrap_content">
 
                 <androidx.recyclerview.widget.RecyclerView
                         android:layout_width="match_parent"
@@ -30,7 +32,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content" android:id="@+id/textView11"
                         app:layout_constraintTop_toBottomOf="@+id/recyclerView"
-                        app:layout_constraintStart_toStartOf="parent" android:layout_marginStart="40dp"
+                        app:layout_constraintStart_toStartOf="parent" android:layout_marginStart="32dp"
                         android:textSize="18sp" android:textStyle="bold"
                         android:textColor="@color/black" android:fontFamily="@font/roboto"
                         android:layout_marginTop="16dp"/>
@@ -62,7 +64,7 @@
                         app:civ_border_width="2dp"
                         app:civ_border_color="@android:color/transparent"
                         app:layout_constraintEnd_toEndOf="parent" app:layout_constraintTop_toTopOf="@+id/textView4"
-                        app:layout_constraintBottom_toBottomOf="@+id/textView5"/>
+                        app:layout_constraintBottom_toBottomOf="@+id/textView5" android:layout_marginEnd="32dp"/>
                 <EditText
                         android:layout_width="0dp"
                         android:layout_height="50dp"
@@ -79,8 +81,8 @@
                         android:drawablePadding="10dp" app:layout_constraintHorizontal_bias="0.0"
                         app:layout_constraintVertical_bias="0.0"/>
                 <androidx.constraintlayout.widget.ConstraintLayout
-                        android:layout_width="341dp"
-                        android:layout_height="122dp"
+                        android:layout_width="0dp"
+                        android:layout_height="140dp"
                         app:layout_constraintTop_toBottomOf="@id/editTextTextPersonName"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintEnd_toEndOf="parent" app:layout_constraintHorizontal_bias="0.0"
@@ -99,7 +101,8 @@
                             app:layout_constraintStart_toEndOf="@+id/imageView2"
                             app:layout_constraintTop_toTopOf="@+id/imageView2" android:textSize="20sp"
                             android:textStyle="bold" android:textColor="@color/black"
-                            android:fontFamily="@font/roboto_medium" android:layout_marginTop="16dp"/>
+                            android:fontFamily="@font/roboto_medium" android:layout_marginTop="16dp"
+                            app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="2dp"/>
                     <TextView
                             android:text="@string/july_1_aug_10"
                             android:layout_width="wrap_content"
@@ -110,7 +113,7 @@
                             android:textSize="18sp"
                             android:textStyle="bold" android:textColor="@color/black"
                             android:fontFamily="@font/roboto" app:layout_constraintHorizontal_bias="0.0"
-                            android:layout_marginTop="8dp"/>
+                            android:layout_marginTop="8dp" android:layout_marginEnd="2dp"/>
                     <androidx.constraintlayout.widget.ConstraintLayout
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -164,20 +167,124 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="bottom"
-                app:backgroundTint="@color/white"
+                android:backgroundTint="@color/white"
                 android:id="@+id/app_bar"
-                app:fabCradleMargin="8dp">
-            <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:backgroundTint="#ff5e00"
-                    android:elevation="3dp"
-                    app:layout_anchor="@id/app_bar"
-                    app:shapeAppearanceOverlay="@style/FabDiamondOverlay"
-                    app:icon="@drawable/ic_shopping_cart"
-                    app:maxImageSize="30dp"
-                    app:tint="@color/white"
-                    android:contentDescription="@string/todo"/>
+                app:fabCradleMargin="8dp"
+                app:fabCradleRoundedCornerRadius="50dp"
+                app:fabCradleVerticalOffset="6dp">
+            <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                <LinearLayout
+                        android:orientation="vertical"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent" android:layout_weight="0.2"
+                        android:id="@+id/BottomHomeButton">
+                    <ImageView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content" app:srcCompat="@drawable/ic_home"
+                            android:id="@+id/BottomHomeImage"/>
+                    <TextView
+                            android:text="@string/home"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/BottomHomeText"
+                            android:textSize="12sp"
+                            android:textColor="#676767"
+                            android:textAlignment="center"
+                            android:fontFamily="@font/roboto_medium"/>
+                </LinearLayout>
+                <LinearLayout
+                        android:orientation="vertical"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent" android:layout_weight="0.2">
+                    <ImageView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            app:srcCompat="@drawable/ic_man"
+                            android:id="@+id/BottomUserImage"/>
+                    <TextView
+                            android:text="Profile"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/BottomUserText"
+                            android:textSize="12sp"
+                            android:textColor="#676767"
+                            android:textAlignment="center"
+                            android:fontFamily="@font/roboto_medium"/>
+                </LinearLayout>
+                <LinearLayout
+                        android:orientation="vertical"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent" android:layout_weight="0.2" android:visibility="invisible">
+                    <ImageView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            app:srcCompat="@drawable/ic_home"
+                            android:id="@+id/BottomCardImage"/>
+                    <TextView
+                            android:text="@string/home"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/BottomCardText"
+                            android:textSize="12sp"
+                            android:textColor="#676767"
+                            android:textAlignment="center"
+                            android:fontFamily="@font/roboto_medium"/>
+                </LinearLayout>
+                <LinearLayout
+                        android:orientation="vertical"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent" android:layout_weight="0.2">
+                    <ImageView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            app:srcCompat="@drawable/ic_chat"
+                            android:id="@+id/BottomSupportImage"/>
+                    <TextView
+                            android:text="Supports"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/BottomSupportText"
+                            android:textSize="12sp"
+                            android:textColor="#676767"
+                            android:textAlignment="center"
+                            android:fontFamily="@font/roboto_medium"/>
+                </LinearLayout>
+                <LinearLayout
+                        android:orientation="vertical"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent" android:layout_weight="0.2">
+                    <ImageView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            app:srcCompat="@drawable/ic_settings"
+                            android:id="@+id/BottomSettingImage"/>
+                    <TextView
+                            android:text="Setting"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/BottomSettingText"
+                            android:textSize="12sp"
+                            android:textColor="#676767"
+                            android:textAlignment="center"
+                            android:fontFamily="@font/roboto_medium"/>
+                </LinearLayout>
+            </LinearLayout>
         </com.google.android.material.bottomappbar.BottomAppBar>
+
+        <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:backgroundTint="#ff5e00"
+                android:elevation="3dp"
+                app:layout_anchor="@id/app_bar"
+                app:shapeAppearanceOverlay="@style/FabDiamondOverlay"
+                app:icon="@drawable/ic_shopping_cart"
+                app:maxImageSize="30dp"
+                app:tint="@color/white"
+                android:contentDescription="@string/todo" android:id="@+id/CardButton"/>
+
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
