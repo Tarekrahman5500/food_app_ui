@@ -1,0 +1,251 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".Activity.CardListActivity">
+
+    <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" android:id="@+id/scrollView3"
+            app:layout_constraintStart_toStartOf="parent" app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" app:layout_constraintTop_toTopOf="parent">
+        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+                      android:orientation="vertical">
+            <TextView
+                    android:text="My Card"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" android:id="@+id/textView6" android:textSize="20sp"
+                    android:textStyle="bold" android:textColor="#ff3d00" android:textAlignment="center"
+                    android:fontFamily="@font/roboto_medium" android:layout_marginTop="32dp"/>
+            <androidx.recyclerview.widget.RecyclerView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" android:id="@+id/recycleview"/>
+            <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" android:layout_marginTop="16dp"
+                    android:layout_marginStart="16dp" android:layout_marginEnd="16dp" android:layout_marginBottom="4dp">
+                <TextView
+                        android:text="Item Total:"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/ItemText" android:layout_weight="1"
+                        android:textStyle="bold" android:textSize="18sp" android:textColor="#373b54"
+                        android:fontFamily="@font/roboto_medium"/>
+                <TextView
+                        android:text="$0"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/TotalItemFeeText" android:textSize="18sp"
+                        android:textStyle="bold" android:textColor="#373b54" android:fontFamily="@font/roboto"/>
+            </LinearLayout>
+            <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" android:layout_marginTop="4dp"
+                    android:layout_marginStart="16dp" android:layout_marginEnd="16dp" android:layout_marginBottom="4dp">
+                <TextView
+                        android:text="Delivery Services:"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/deliveryText" android:layout_weight="1"
+                        android:textStyle="bold" android:textSize="18sp" android:textColor="#373b54"
+                        android:fontFamily="@font/roboto_medium"/>
+                <TextView
+                        android:text="$0"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/deliveryTextFee" android:textSize="18sp"
+                        android:textStyle="bold" android:textColor="#373b54" android:fontFamily="@font/roboto"/>
+            </LinearLayout>
+            <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" android:layout_marginTop="4dp"
+                    android:layout_marginStart="16dp" android:layout_marginEnd="16dp" android:layout_marginBottom="4dp">
+                <TextView
+                        android:text="Tax:"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/TaxText" android:layout_weight="1"
+                        android:textStyle="bold" android:textSize="18sp" android:textColor="#373b54"
+                        android:fontFamily="@font/roboto_medium"/>
+                <TextView
+                        android:text="$0"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/TaxTextFee" android:textSize="18sp"
+                        android:textStyle="bold" android:textColor="#373b54" android:fontFamily="@font/roboto"/>
+            </LinearLayout>
+            <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" android:layout_marginTop="16dp"
+                    android:layout_marginStart="16dp" android:layout_marginEnd="16dp" android:layout_marginBottom="4dp">
+                <TextView
+                        android:text="Total:"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/TotalText" android:layout_weight="1"
+                        android:textStyle="bold" android:textSize="30sp" android:textColor="#373b54"
+                        android:fontFamily="@font/roboto_medium"/>
+                <TextView
+                        android:text="$0"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/TotalTextFee" android:textSize="30sp"
+                        android:textStyle="bold" android:textColor="#373b54" android:fontFamily="@font/roboto_medium"/>
+            </LinearLayout>
+            <TextView
+                    android:text="CheckOut"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp" android:id="@+id/textView16"
+                    android:textSize="25sp"
+                    android:textColor="@color/white" android:textStyle="bold" android:fontFamily="@font/roboto_medium"
+                    android:background="@drawable/orange_button" android:gravity="center" android:layout_margin="16dp"/>
+        </LinearLayout>
+    </ScrollView>
+    <TextView
+            android:text="Your Card Is Empty"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" android:id="@+id/emptyText"
+            app:layout_constraintTop_toTopOf="parent"
+            android:textSize="16sp" android:textStyle="bold" android:fontFamily="@font/roboto"
+            android:textColor="@color/black" android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"/>
+
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
+        <com.google.android.material.bottomappbar.BottomAppBar
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom"
+                android:backgroundTint="@color/white"
+                android:id="@+id/app_bar"
+                app:fabCradleMargin="8dp"
+                app:fabCradleRoundedCornerRadius="50dp"
+                app:fabCradleVerticalOffset="6dp">
+            <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                <LinearLayout
+                        android:orientation="vertical"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent" android:layout_weight="0.2"
+                        android:id="@+id/BottomHomeButton">
+                    <ImageView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content" app:srcCompat="@drawable/ic_home"
+                            android:id="@+id/BottomHomeImage"/>
+                    <TextView
+                            android:text="@string/home"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/BottomHomeText"
+                            android:textSize="12sp"
+                            android:textColor="#676767"
+                            android:textAlignment="center"
+                            android:fontFamily="@font/roboto_medium"/>
+                </LinearLayout>
+                <LinearLayout
+                        android:orientation="vertical"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent" android:layout_weight="0.2">
+                    <ImageView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            app:srcCompat="@drawable/ic_man"
+                            android:id="@+id/BottomUserImage"/>
+                    <TextView
+                            android:text="Profile"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/BottomUserText"
+                            android:textSize="12sp"
+                            android:textColor="#676767"
+                            android:textAlignment="center"
+                            android:fontFamily="@font/roboto_medium"/>
+                </LinearLayout>
+                <LinearLayout
+                        android:orientation="vertical"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent" android:layout_weight="0.2" android:visibility="invisible">
+                    <ImageView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            app:srcCompat="@drawable/ic_home"
+                            android:id="@+id/BottomCardImage"/>
+                    <TextView
+                            android:text="@string/home"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/BottomCardText"
+                            android:textSize="12sp"
+                            android:textColor="#676767"
+                            android:textAlignment="center"
+                            android:fontFamily="@font/roboto_medium"/>
+                </LinearLayout>
+                <LinearLayout
+                        android:orientation="vertical"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent" android:layout_weight="0.2">
+                    <ImageView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            app:srcCompat="@drawable/ic_chat"
+                            android:id="@+id/BottomSupportImage"/>
+                    <TextView
+                            android:text="Supports"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/BottomSupportText"
+                            android:textSize="12sp"
+                            android:textColor="#676767"
+                            android:textAlignment="center"
+                            android:fontFamily="@font/roboto_medium"/>
+                </LinearLayout>
+                <LinearLayout
+                        android:orientation="vertical"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent" android:layout_weight="0.2">
+                    <ImageView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            app:srcCompat="@drawable/ic_settings"
+                            android:id="@+id/BottomSettingImage"/>
+                    <TextView
+                            android:text="Setting"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/BottomSettingText"
+                            android:textSize="12sp"
+                            android:textColor="#676767"
+                            android:textAlignment="center"
+                            android:fontFamily="@font/roboto_medium"/>
+                </LinearLayout>
+            </LinearLayout>
+        </com.google.android.material.bottomappbar.BottomAppBar>
+
+        <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:backgroundTint="#ff5e00"
+                android:elevation="3dp"
+                app:layout_anchor="@id/app_bar"
+                app:shapeAppearanceOverlay="@style/FabDiamondOverlay"
+                app:icon="@drawable/ic_shopping_cart"
+                app:maxImageSize="30dp"
+                app:tint="@color/white"
+                android:contentDescription="@string/todo" android:id="@+id/CardButton"/>
+
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                                                   xmlns:app="http://schemas.android.com/apk/res-auto"
+                                                   xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+                                                   android:layout_height="wrap_content"
+                                                   android:layout_marginStart="16dp" android:layout_marginEnd="16dp"
+                                                   android:layout_marginTop="10dp" android:layout_marginBottom="10dp"
+                                                   android:background="@drawable/card_background"
+                                                   android:elevation="3dp">
+
+    <ImageView
+            android:layout_width="100dp"
+            android:layout_height="100dp" app:srcCompat="@drawable/unnamed_pizza" android:id="@+id/picCard"
+            app:layout_constraintStart_toStartOf="parent" app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" app:layout_constraintHorizontal_bias="0.0"
+            android:layout_marginBottom="4dp" android:layout_marginStart="4dp" android:layout_marginTop="4dp"/>
+    <TextView
+            android:text="title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" android:id="@+id/CardtitleText"
+            app:layout_constraintStart_toEndOf="@+id/picCard" app:layout_constraintTop_toTopOf="@+id/picCard"
+            android:layout_marginTop="16dp" android:layout_marginStart="8dp" android:textSize="18sp"
+            android:textStyle="bold" android:textColor="#373b54" android:fontFamily="@font/roboto_medium"/>
+    <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" app:srcCompat="@drawable/minus" android:id="@+id/CardMinus"
+            app:layout_constraintStart_toEndOf="@+id/picCard"
+            app:layout_constraintBottom_toBottomOf="@+id/picCard" android:layout_marginStart="8dp"
+            android:layout_marginBottom="8dp"/>
+    <TextView
+            android:text="1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" android:id="@+id/numberItemText"
+            app:layout_constraintStart_toEndOf="@+id/CardMinus"
+            app:layout_constraintBottom_toBottomOf="@+id/CardMinus"
+            app:layout_constraintTop_toTopOf="@+id/CardMinus" android:layout_marginStart="8dp"
+            android:fontFamily="@font/roboto" android:textColor="#373b54"
+            android:textStyle="bold" android:textSize="18sp"/>
+    <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" app:srcCompat="@drawable/plus" android:id="@+id/CardPlus"
+            app:layout_constraintStart_toEndOf="@+id/numberItemText"
+            app:layout_constraintBottom_toBottomOf="@+id/CardMinus"
+            app:layout_constraintTop_toTopOf="@+id/CardMinus" android:layout_marginStart="8dp"/>
+    <TextView
+            android:text="0"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" android:id="@+id/feeEachItem"
+            app:layout_constraintEnd_toEndOf="parent" app:layout_constraintBottom_toBottomOf="@+id/CardtitleText"
+            android:layout_marginEnd="16dp" android:textColor="#373b54" android:textSize="16sp"
+            android:fontFamily="@font/roboto_medium"/>
+    <TextView
+            android:text="$"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" android:id="@+id/textView17"
+            app:layout_constraintEnd_toStartOf="@+id/feeEachItem"
+            app:layout_constraintBottom_toBottomOf="@+id/feeEachItem"
+            app:layout_constraintTop_toTopOf="@+id/feeEachItem" android:layout_marginEnd="4dp"
+            android:textColor="#ff3d00" android:fontFamily="@font/roboto"/>
+    <TextView
+            android:text="0"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" android:id="@+id/totalEachItem"
+            app:layout_constraintEnd_toEndOf="@+id/feeEachItem"
+            app:layout_constraintBottom_toBottomOf="@+id/CardPlus"
+            app:layout_constraintTop_toTopOf="@+id/CardPlus"
+            android:textColor="#373b54" android:textSize="18sp"
+            android:textStyle="bold"
+            android:fontFamily="@font/roboto_medium"/>
+    <TextView
+            android:text="$"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" android:id="@+id/textView19"
+            app:layout_constraintEnd_toStartOf="@+id/totalEachItem"
+            app:layout_constraintBottom_toBottomOf="@+id/totalEachItem"
+            app:layout_constraintTop_toTopOf="@+id/totalEachItem"
+            android:textColor="#ff3d00" android:fontFamily="@font/roboto"
+            android:textSize="16sp" android:layout_marginEnd="4dp"/>
+</androidx.constraintlayout.widget.ConstraintLayout>
