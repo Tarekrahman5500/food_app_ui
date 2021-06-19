@@ -1,11 +1,10 @@
 package com.example.foodorderui.Activity;
 
-import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
+import androidx.appcompat.app.AppCompatActivity;
 import com.bumptech.glide.Glide;
 import com.example.foodorderui.Domain.FoodDomain;
 import com.example.foodorderui.Helper.ManagementCard;
-import com.example.foodorderui.R;
 import com.example.foodorderui.databinding.ActivityShowDetailBinding;
 
 import java.util.Objects;
@@ -26,6 +25,8 @@ public class ShowDetailActivity extends AppCompatActivity {
     }
 
     private void getBundle() {
+
+        // object come from popular adapter
         object = (FoodDomain) getIntent().getSerializableExtra("object");
         int drawableResourceId = this.getResources().getIdentifier(object.getPic()
                 , "drawable", this.getPackageName());

@@ -1,5 +1,6 @@
 package com.example.foodorderui.Adapter;
 
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,6 +11,7 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
+import com.example.foodorderui.Activity.PizzaActivity;
 import com.example.foodorderui.Domain.CategoryDomain;
 import com.example.foodorderui.R;
 
@@ -63,6 +65,14 @@ public class CategoryAdapter  extends RecyclerView.Adapter<CategoryAdapter.ViewH
                 holder.itemView.getContext().getPackageName());
 
         Glide.with(holder.itemView.getContext()).load(drawableResourceId).into(holder.categoryPic);
+
+        holder.mainLayout.setOnClickListener(v -> {
+            if (position == 0) {
+                Intent intent = new Intent(holder.mainLayout.getContext(), PizzaActivity.class);
+                holder.mainLayout.getContext().startActivity(intent);
+
+            }
+        });
     }
 
 
