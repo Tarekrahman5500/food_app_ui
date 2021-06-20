@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                                                   xmlns:app="http://schemas.android.com/apk/res-auto"
+                                                   android:layout_width="match_parent"
+                                                   android:layout_height="match_parent">
+
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
+        <com.google.android.material.bottomappbar.BottomAppBar
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom"
+                android:backgroundTint="@color/white"
+                android:id="@+id/app_bar"
+                app:fabCradleMargin="8dp"
+                app:fabCradleRoundedCornerRadius="50dp"
+                app:fabCradleVerticalOffset="6dp">
+            <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" android:baselineAligned="false">
+
+                <LinearLayout
+                        android:orientation="vertical"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent" android:layout_weight="0.2"
+                        android:id="@+id/BottomHomeButton">
+                    <ImageView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content" app:srcCompat="@drawable/ic_home"
+                            android:id="@+id/BottomHomeImage"/>
+                    <TextView
+                            android:text="@string/home"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/BottomHomeText"
+                            android:textSize="12sp"
+                            android:textColor="#676767"
+                            android:textAlignment="center"
+                            android:fontFamily="@font/roboto_medium"/>
+                </LinearLayout>
+                <LinearLayout
+                        android:orientation="vertical"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent" android:layout_weight="0.2">
+                    <ImageView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            app:srcCompat="@drawable/ic_man"
+                            android:id="@+id/BottomUserImage"/>
+                    <TextView
+                            android:text="Profile"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/BottomUserText"
+                            android:textSize="12sp"
+                            android:textColor="#676767"
+                            android:textAlignment="center"
+                            android:fontFamily="@font/roboto_medium"/>
+                </LinearLayout>
+                <LinearLayout
+                        android:orientation="vertical"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent" android:layout_weight="0.2" android:visibility="invisible">
+                    <ImageView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            app:srcCompat="@drawable/ic_home"
+                            android:id="@+id/BottomCardImage"/>
+                    <TextView
+                            android:text="@string/home"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/BottomCardText"
+                            android:textSize="12sp"
+                            android:textColor="#676767"
+                            android:textAlignment="center"
+                            android:fontFamily="@font/roboto_medium"/>
+                </LinearLayout>
+                <LinearLayout
+                        android:orientation="vertical"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent" android:layout_weight="0.2">
+                    <ImageView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            app:srcCompat="@drawable/ic_chat"
+                            android:id="@+id/BottomSupportImage"/>
+                    <TextView
+                            android:text="Supports"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/BottomSupportText"
+                            android:textSize="12sp"
+                            android:textColor="#676767"
+                            android:textAlignment="center"
+                            android:fontFamily="@font/roboto_medium"/>
+                </LinearLayout>
+                <LinearLayout
+                        android:orientation="vertical"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent" android:layout_weight="0.2">
+                    <ImageView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            app:srcCompat="@drawable/ic_settings"
+                            android:id="@+id/BottomSettingImage"/>
+                    <TextView
+                            android:text="Setting"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/BottomSettingText"
+                            android:textSize="12sp"
+                            android:textColor="#676767"
+                            android:textAlignment="center"
+                            android:fontFamily="@font/roboto_medium"/>
+                </LinearLayout>
+            </LinearLayout>
+        </com.google.android.material.bottomappbar.BottomAppBar>
+
+        <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:backgroundTint="#ff5e00"
+                android:elevation="3dp"
+                app:layout_anchor="@id/app_bar"
+                app:shapeAppearanceOverlay="@style/FabDiamondOverlay"
+                app:icon="@drawable/ic_shopping_cart"
+                app:maxImageSize="30dp"
+                app:tint="@color/white"
+                android:contentDescription="@string/todo" android:id="@+id/CardButton"/>
+
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
