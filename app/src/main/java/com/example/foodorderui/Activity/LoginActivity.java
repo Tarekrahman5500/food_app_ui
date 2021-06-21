@@ -3,24 +3,28 @@ package com.example.foodorderui.Activity;
 import android.content.Intent;
 import android.text.method.HideReturnsTransformationMethod;
 import android.text.method.PasswordTransformationMethod;
-import android.util.Patterns;
 import android.view.View;
 import android.widget.*;
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import androidx.core.content.ContextCompat;
+import com.example.foodorderui.Helper.Methods;
 import com.example.foodorderui.MainActivity;
+import com.example.foodorderui.Model.UserModel;
 import com.example.foodorderui.R;
 import com.example.foodorderui.databinding.ActivityLoginBinding;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.*;
 
+import java.util.ArrayList;
 import java.util.Objects;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 public class LoginActivity extends AppCompatActivity {
     ActivityLoginBinding binding;
-    Boolean matchPass = false;
-    Boolean mailPattern = false;
+    FirebaseDatabase database;
+    FirebaseAuth auth;
+    boolean validate_data = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,20 +34,24 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
         Objects.requireNonNull(getSupportActionBar()).hide();
 
+        auth = FirebaseAuth.getInstance();
+        database = FirebaseDatabase.getInstance();
+
         //  binding.ForgotPasword.getPaint().setUnderlineText(true);
-
-
-        // awesomeValidation.setContext(this);
-
-        ChangeLoginSignUPColor(binding.CallLogin, binding.CallSignUp, binding.LoginLayout, binding.SignUpLayout);
-        ChangeLoginSignUPColor(binding.CallSignUp, binding.CallLogin, binding.SignUpLayout, binding.LoginLayout);
+        // change the color or login and signup icon when switch position
+        Methods.ChangeLoginSignUPColor(binding.CallLogin, binding.CallSignUp, binding.LoginLayout, binding.SignUpLayout, this);
+        Methods.ChangeLoginSignUPColor(binding.CallSignUp, binding.CallLogin, binding.SignUpLayout, binding.LoginLayout, this);
 
 
         binding.signUpGoogle.setOnClickListener(v -> Toast.makeText(this, "google", Toast.LENGTH_SHORT).show());
         binding.signUpFB.setOnClickListener(v -> Toast.makeText(this, "FB", Toast.LENGTH_SHORT).show());
 
-        ShowHidePass(binding.imageId, binding.userPassword);
-        ShowHidePass(binding.imageId2, binding.userPasswordConfram);
+        // for create account password and confram password
+        Methods.ShowHidePass(binding.imageId, binding.userPassword);
+        Methods.ShowHidePass(binding.imageId2, binding.userPasswordConfram);
+
+        // for login time
+        Methods.ShowHidePass(binding.imageId3, binding.loginPassword);
 
         binding.loginButton.setOnClickListener(v -> {
             if (binding.loginMail.getText().toString().isEmpty()) {
@@ -54,138 +62,114 @@ public class LoginActivity extends AppCompatActivity {
                 binding.loginPassword.setError("Password can't be empty");
                 return;
             }
-            startActivity(new Intent(LoginActivity.this, MainActivity.class));
-            binding.loginMail.setText(null);
-            binding.loginPassword.setText(null);
+            // check that the user data is in database Authentication table or not
+            auth.signInWithEmailAndPassword
+                    (binding.loginMail.getText().toString(), binding.loginPassword.getText().toString())
+                    .addOnCompleteListener(task -> {
+                        if (task.isSuccessful()) {
+                            startActivity(new Intent(this, MainActivity.class));
+                            finish();
+                        } else {
+                            Toast.makeText(this, Objects.requireNonNull(task.getException()).getMessage(),
+                                    Toast.LENGTH_SHORT).show();
+                        }
+                    });
+          //  startActivity(new Intent(LoginActivity.this, MainActivity.class));
+
+            //binding.loginMail.setText(null);
+           // binding.loginPassword.setText(null);
         });
 
 
-        //adding validation to edittexts
+        binding.userPhoneNumber.setText(String.valueOf(880));
+        // validity check before signup
+        binding.signUpButton.setOnClickListener(this::onClick);
 
-        binding.userPhoneNumber.setText(String.valueOf(+880));
-        binding.signUpButton.setOnClickListener(v -> {
 
-            if (validatePassword(binding.userPassword) | !validateConframPass(binding.userPassword, binding.userPasswordConfram)
-                    | !validatePhoneNo(binding.userPhoneNumber) | !validateEmail(binding.userEmail) |
-                    !validateUserName(binding.userName)
-            ) {
-                Toast.makeText(this, "Fill all the field correctly", Toast.LENGTH_SHORT).show();
-            } else {
-                Toast.makeText(this, "User Created", Toast.LENGTH_SHORT).show();
-            }
-        });
     }
 
-    private boolean validateConframPass(EditText p1, EditText p2) {
-        if (p2.getText().toString().isEmpty()) {
-            p2.setError("empty");
-            return false;
-        } else if (!p1.getText().toString().equals(p2.getText().toString())) {
-         //   Toast.makeText(this, "here", Toast.LENGTH_SHORT).show();
-            p1.setError("not match");
-            p2.setError("not match");
-            return false;
+    private void CheckPhoneEmailDuplicate(EditText userPhoneNumber, EditText userEmail) {
 
-        } else {
-
-            p1.setError(null);
-            p2.setError(null);
-            return true;
-        }
-    }
+        DatabaseReference mDatabase;
+        mDatabase = FirebaseDatabase.getInstance().getReference();
+        ArrayList<UserModel> list = new ArrayList<>();
 
 
-    private boolean validateUserName(EditText userName) {
+            mDatabase.child("users").addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    list.clear();
+                    for (DataSnapshot ds : snapshot.getChildren()) {
+                        UserModel users = ds.getValue(UserModel.class);
+                        Objects.requireNonNull(users).setUserId(ds.getKey());
+                        list.add(users);
 
-        if (Objects.requireNonNull(userName).getText().toString().isEmpty()) {
-            userName.setError("Field cannot be empty");
-            return false;
-        } else {
-            userName.setError(null);
-            return true;
-        }
-    }
+                    }
+                    // System.out.println("size of list is  " + list.size());
+                    for (UserModel elements : list) {
+                        if (elements.getPhone().equals(userPhoneNumber.getText().toString()))  {
+                            System.out.println(elements.getPhone());
+                            userPhoneNumber.setError("Phone Number Already Exist");
+                           // System.out.println(userPhoneNumber.getText().toString());
 
-    private boolean validateEmail(EditText p1) {
-        String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
-        if (Objects.requireNonNull(p1).getText().toString().isEmpty()) {
-            p1.setError("Field cannot be empty");
-            return false;
-        } else if (!Objects.requireNonNull(p1).getText().toString()
-                .matches(emailPattern)) {
-            p1.setError("Invalid email address");
-            return false;
-
-        } else {
-            p1.setError(null);
-            return true;
-        }
-    }
-
-    private boolean validatePhoneNo(EditText p1) {
-        if (Objects.requireNonNull(p1).getText().toString().isEmpty()) {
-            p1.setError("Field cannot be empty");
-            return false;
-        } else if (Objects.requireNonNull(p1).getText().toString().length() != 13) {
-            p1.setError("Invalid");
-            return false;
-        } else {
-            p1.setError(null);
-            return true;
-        }
-    }
-
-    private boolean validatePassword(EditText p1) {
-        String passwordVal = "^" +
-                "(?=.*[0-9])" +         //at least 1 digit
-                "(?=.*[a-z])" +         //at least 1 lower case letter
-                "(?=.*[A-Z])" +         //at least 1 upper case letter
-                "(?=.*[a-zA-Z])" +      //any letter
-                "(?=.*[@#$%^&+=])" +    //at least 1 special character
-                "(?=\\S+$)" +           //no white spaces
-                ".{4,}" +               //at least 4 characters
-                "$";
-
-        if (Objects.requireNonNull(p1).getText().toString().isEmpty()) {
-            p1.setError("Field cannot be empty");
-            return true;
-        } else if (!Objects.requireNonNull(p1).getText().toString().matches(passwordVal)) {
-            p1.setError("Password is too weak");
-            return true;
-        } else {
-            p1.setError(null);
-            return false;
-        }
-    }
+                        }
+                        if (elements.getEmail().equals(userEmail.getText().toString()))  {
+                            System.out.println(elements.getPhone());
+                            userEmail.setError("Email Already Exist");
+                           // System.out.println(userEmail.getText().toString());
+                        }
+                    }
+                }
 
 
-    private void ChangeLoginSignUPColor(TextView p1, TextView p2, ScrollView p3, ScrollView p4) {
-        p1.setOnClickListener(v -> {
-            p3.setVisibility(View.VISIBLE);
-            p4.setVisibility(View.GONE);
-
-            p2.setTextColor(ContextCompat.getColor(this, R.color.LogoText));
-            p1.setTextColor(ContextCompat.getColor(this, R.color.white));
-        });
-    }
-
-    public static void ShowHidePass(ImageView p, EditText p2) {
-        p.setOnClickListener(v -> {
-
-            if (v.getId() == p.getId()) {
-                if (p2.getTransformationMethod().equals(PasswordTransformationMethod.getInstance())) {
-                    p.setImageResource(R.drawable.ic_view);
-
-                    //Show Password
-                    p2.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
-                } else {
-                    p.setImageResource(R.drawable.ic_pass_show);
-
-                    //Hide Password
-                    p2.setTransformationMethod(PasswordTransformationMethod.getInstance());
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
 
                 }
-            }
-        });
+            });
+
     }
+
+
+    private void onClick(View v) {
+
+        if (Methods.validatePassword(binding.userPassword) | !Methods.validateConframPass(binding.userPassword, binding.userPasswordConfram)
+                | Methods.validatePhoneNo(binding.userPhoneNumber) | Methods.validateEmail(binding.userEmail) |
+                Methods.validateUserName(binding.userName)
+        ) {
+            // function check that the user phone number and email are already use or not
+            CheckPhoneEmailDuplicate(binding.userPhoneNumber, binding.userEmail);
+            Toast.makeText(this, "Fill all the field correctly", Toast.LENGTH_SHORT).show();
+        } else {
+
+            // add data to firebase here unique key is phone number
+            try {
+                auth.createUserWithEmailAndPassword(
+                        binding.userEmail.getText().toString(),
+                        binding.userPassword.getText().toString()).addOnCompleteListener(task -> {
+                  if (task.isSuccessful()) {
+                      UserModel userModel = new UserModel(
+                              binding.userName.getText().toString(),
+                              binding.userPhoneNumber.getText().toString(),
+                              binding.userEmail.getText().toString(),
+                              binding.userPassword.getText().toString());
+                      String id = Objects.requireNonNull(Objects.requireNonNull(task.getResult()).getUser()).getUid();
+                      database.getReference().child("users").child(id).setValue(userModel);
+                      Toast.makeText(this, "User Created", Toast.LENGTH_SHORT).show();
+                      startActivity(new Intent(this,MainActivity.class));
+                      finish();
+                  } else {
+                      Toast.makeText(this, Objects.requireNonNull(task.getException()).getMessage(),
+                              Toast.LENGTH_SHORT).show();
+                  }
+                });
+
+
+            } catch (Exception e) {
+                Toast.makeText(this, e.getMessage(), Toast.LENGTH_LONG).show();
+            }
+        }
+    }
+
+
 }

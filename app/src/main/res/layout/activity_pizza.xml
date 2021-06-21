@@ -17,4 +17,7 @@
                     android:layout_height="match_parent" android:id="@+id/rectlerview"/>
         </LinearLayout>
     </ScrollView>
+    <include
+            android:id="@+id/bottom_card"
+            layout="@layout/bottom_card" android:layout_width="match_parent" android:layout_height="match_parent"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

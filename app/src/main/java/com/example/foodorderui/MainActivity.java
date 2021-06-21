@@ -6,6 +6,7 @@ import android.os.Bundle;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import com.example.foodorderui.Activity.CardListActivity;
+import com.example.foodorderui.Activity.UserActivity;
 import com.example.foodorderui.Adapter.CategoryAdapter;
 import com.example.foodorderui.Adapter.PopularAdapter;
 import com.example.foodorderui.Domain.CategoryDomain;
@@ -31,10 +32,13 @@ public class MainActivity extends AppCompatActivity {
         recyclerViewCategoryList();
         recyclerViewPopularList();
 
-        binding.CardButton.setOnClickListener(v ->
+        binding.bottomCard.CardButton.setOnClickListener(v ->
                 startActivity(new Intent(MainActivity.this, CardListActivity.class)));
-        binding.BottomHomeButton.setOnClickListener(v ->
+        binding.bottomCard.BottomHomeButton.setOnClickListener(v ->
                 startActivity(new Intent(MainActivity.this, MainActivity.class)));
+
+        binding.bottomCard.BottomUserImage.setOnClickListener(v ->
+                startActivity(new Intent(MainActivity.this, UserActivity.class)));
 
     }
 

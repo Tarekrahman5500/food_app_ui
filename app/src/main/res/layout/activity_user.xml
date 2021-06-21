@@ -91,6 +91,7 @@
                                 android:layout_height="wrap_content"
                                 android:inputType="textPassword"
                                 android:ems="10"
+                                android:maxLength="25"
                                 android:background="@drawable/search_background"
                                 android:layout_marginStart="40dp" android:layout_marginEnd="40dp"
                                 android:layout_marginTop="25dp"
@@ -127,7 +128,7 @@
                     <TextView
                             android:text="Update"
                             android:layout_width="170dp"
-                            android:layout_height="wrap_content" android:id="@+id/loginButton"
+                            android:layout_height="wrap_content" android:id="@+id/updateButton"
                             android:fontFamily="@font/roboto_medium" android:layout_marginTop="35dp"
                             android:layout_marginEnd="40dp" android:padding="10dp"
                             android:textSize="27sp" android:textColor="@color/white" android:textAlignment="center"
@@ -204,7 +205,7 @@
             android:background="@color/white"
             app:layout_constraintTop_toBottomOf="@+id/linearLayout4">
         <include
-                android:id="@+id/bootom_card"
+                android:id="@+id/bottom_card"
                 layout="@layout/bottom_card" android:layout_width="match_parent" android:layout_height="match_parent"/>
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

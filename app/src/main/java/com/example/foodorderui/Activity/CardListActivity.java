@@ -31,9 +31,9 @@ public class CardListActivity extends AppCompatActivity {
         initList();
         calculatedCard();
 
-        binding.CardButton.setOnClickListener(v ->
+        binding.bottomCard.CardButton.setOnClickListener(v ->
                 startActivity(new Intent(CardListActivity.this, CardListActivity.class)));
-        binding.BottomHomeButton.setOnClickListener(v ->
+        binding.bottomCard.BottomHomeButton.setOnClickListener(v ->
                 startActivity(new Intent(CardListActivity.this, MainActivity.class)));
 
     }
