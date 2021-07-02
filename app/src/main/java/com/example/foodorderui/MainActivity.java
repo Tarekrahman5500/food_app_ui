@@ -1,34 +1,48 @@
 package com.example.foodorderui;
 
+import android.app.Activity;
 import android.content.Intent;
+import android.view.View;
+import android.widget.Toast;
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import com.example.foodorderui.Activity.CardListActivity;
+import com.example.foodorderui.Activity.SettingActivity;
 import com.example.foodorderui.Activity.UserActivity;
 import com.example.foodorderui.Adapter.CategoryAdapter;
 import com.example.foodorderui.Adapter.PopularAdapter;
 import com.example.foodorderui.Domain.CategoryDomain;
 import com.example.foodorderui.Domain.FoodDomain;
 import com.example.foodorderui.databinding.ActivityMainBinding;
+import com.example.foodorderui.databinding.BottomCardBinding;
 import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.*;
 
 import java.util.ArrayList;
 import java.util.Objects;
 
 public class MainActivity extends AppCompatActivity {
+    FirebaseDatabase database;
+    DatabaseReference databaseReference;
+    FirebaseAuth auth;
 
     private RecyclerView.Adapter adapter, adapter2;
 
     ActivityMainBinding binding;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         Objects.requireNonNull(getSupportActionBar()).hide();
-
+        database = FirebaseDatabase.getInstance();
+        auth = FirebaseAuth.getInstance();
+        databaseReference = FirebaseDatabase.getInstance().getReference("users");
         recyclerViewCategoryList();
         recyclerViewPopularList();
 
@@ -40,7 +54,16 @@ public class MainActivity extends AppCompatActivity {
         binding.bottomCard.BottomUserImage.setOnClickListener(v ->
                 startActivity(new Intent(MainActivity.this, UserActivity.class)));
 
+        binding.bottomCard.BottomSettingImage.setOnClickListener(v ->
+                startActivity(new Intent(MainActivity.this, SettingActivity.class)));
+
+        // if the user is admin it will show the admin panel
+      //  settingActivity .ShowAdminPanel(databaseReference, binding.bottomCard, MainActivity.this);
+
     }
+
+
+
 
 
 
@@ -74,4 +97,6 @@ public class MainActivity extends AppCompatActivity {
         adapter = new CategoryAdapter(categoryDomains);
         binding.recyclerView.setAdapter(adapter);
     }
+
+
 }

@@ -5,7 +5,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.bumptech.glide.Glide;
 import com.example.foodorderui.Domain.FoodDomain;
 import com.example.foodorderui.Helper.ManagementCard;
+import com.example.foodorderui.MainActivity;
 import com.example.foodorderui.databinding.ActivityShowDetailBinding;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.Objects;
 
@@ -14,12 +18,21 @@ public class ShowDetailActivity extends AppCompatActivity {
     private ManagementCard managementCard;
     private  int NumberOfOrder = 1;
    ActivityShowDetailBinding binding;
+    FirebaseDatabase database;
+    DatabaseReference databaseReference;
+    FirebaseAuth auth;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = ActivityShowDetailBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         Objects.requireNonNull(getSupportActionBar()).hide();
+        database = FirebaseDatabase.getInstance();
+        auth = FirebaseAuth.getInstance();
+        databaseReference = FirebaseDatabase.getInstance().getReference("users");
+        // show the admin panel if the user is admin
+        MainActivity mainActivity = new MainActivity();
+       // mainActivity.ShowAdminPanel(databaseReference, binding.bottomCard, ShowDetailActivity.this);
        managementCard = new ManagementCard(this);
         getBundle();
     }

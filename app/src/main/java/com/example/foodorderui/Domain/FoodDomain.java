@@ -10,13 +10,6 @@ public class FoodDomain implements Serializable {
     private Double fee;
     private int numberInCard;
 
-    public FoodDomain(String title, String pic, String description, Double fee) {
-        this.title = title;
-        this.pic = pic;
-        this.description = description;
-        this.fee = fee;
-    }
-
     public FoodDomain(String title, String pic, String description, Double fee, int numberInCard) {
         this.title = title;
         this.pic = pic;
@@ -24,6 +17,25 @@ public class FoodDomain implements Serializable {
         this.fee = fee;
         this.numberInCard = numberInCard;
     }
+
+    public FoodDomain(String title, String pic, String description, Double fee) {
+        this.title = title;
+        this.pic = pic;
+        this.description = description;
+        this.fee = fee;
+    }
+    public FoodDomain () {}
+    public FoodDomain(String title, String description, Double fee) {
+        this.title = title;
+        this.description = description;
+        this.fee = fee;
+    }
+
+public FoodDomain(String pic) {
+    this.pic = pic;
+}
+
+
 
     public String getTitle() {
         return title;

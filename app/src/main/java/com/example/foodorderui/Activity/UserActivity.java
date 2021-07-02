@@ -16,6 +16,7 @@ import com.example.foodorderui.MainActivity;
 import com.example.foodorderui.Model.UserModel;
 import com.example.foodorderui.R;
 import com.example.foodorderui.databinding.ActivityUserBinding;
+import com.example.foodorderui.databinding.BottomCardBinding;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.*;
 import com.google.firebase.storage.FirebaseStorage;
@@ -59,6 +60,7 @@ public class UserActivity extends AppCompatActivity {
         // change  of Location field any show layout
         Methods.ChangeColor(binding.textView30, binding.locationLayout, this);
 
+
         binding.updatePhoneNumber.setText(String.valueOf(880));
 
         binding.bottomCard.BottomHomeButton.setOnClickListener(v ->
@@ -66,6 +68,8 @@ public class UserActivity extends AppCompatActivity {
 
         // binding.updatePassword.setText("123456");
         Methods.ShowHidePass(binding.imageId, binding.updatePassword);
+
+        //  binding.updateButton.setEnabled(false);
 
         //show data to all fields
         ShowCurrentUserData();
@@ -98,6 +102,7 @@ public class UserActivity extends AppCompatActivity {
                     if (data.getData() != null) {
                         Uri file = data.getData();
                         binding.ProfileImage.setImageURI(file);
+                        //   binding.updateButton.setEnabled(true);
 
                         final StorageReference reference = storage.getReference().child("profilePicture")
                                 .child(Objects.requireNonNull(FirebaseAuth.getInstance().getUid()));
@@ -154,12 +159,13 @@ public class UserActivity extends AppCompatActivity {
 
         ) {
             Toast.makeText(this, "Fill all the field correctly", Toast.LENGTH_SHORT).show();
-        }
+        } else {
+            updateUserData();
+            //Toast.makeText(this, "User Update", Toast.LENGTH_SHORT).show();
 
-         else {
-               updateUserData();
-                Toast.makeText(this, "User Update", Toast.LENGTH_SHORT).show();
-            }
+          //  Query query = databaseReference.orderByChild("admin").equalTo("true");
+
+        }
 
     }
 
@@ -173,52 +179,62 @@ public class UserActivity extends AppCompatActivity {
     }
 
     private boolean isPhoneChanged() {
+        // binding.updateButton.setEnabled(false);
 
         if (!user_phoneNo.equals(Objects.requireNonNull(binding.updatePhoneNumber).getText().toString())) {
-              databaseReference.orderByChild("phone").equalTo(binding.updatePhoneNumber.getText().toString())
-                      .addListenerForSingleValueEvent(new ValueEventListener() {
+            databaseReference.orderByChild("phone").equalTo(binding.updatePhoneNumber.getText().toString())
+                    .addListenerForSingleValueEvent(new ValueEventListener() {
 
-                          @Override
-                          public void onDataChange(@NonNull DataSnapshot snapshot) {
-                              if (snapshot.getValue() != null){
-                                  //it means user already registered
-                                  binding.updatePhoneNumber.setError("Phone Number Already Use");
-                               // isPhoneChanged();
-                              }else{
-                                  //It is new users
-                                  //write an entry to your user table
-                                  //writeUserEntryToDB();
-                                  databaseReference.child(Objects.requireNonNull(FirebaseAuth.getInstance().getUid()))
-                                          .child("phone").setValue(binding.updatePhoneNumber.getText().toString());
-                                  user_phoneNo = binding.updatePhoneNumber.getText().toString();
-                              }
-                          }
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                            while (snapshot.exists()) {
+                                if (snapshot.getValue() != null) {
+                                    //it means user already registered
+                                    binding.updatePhoneNumber.setError("Phone Number Already Use");
+                                    Toast.makeText(UserActivity.this, "Phone Number Already Use", Toast.LENGTH_SHORT).show();
+                                    // isPhoneChanged();
+                                    //   binding.updateButton.setEnabled(false);
+                                    break;
+                                } else {
+                                    //It is new users
+                                    //write an entry to your user table
+                                    //writeUserEntryToDB();
+                                    //  binding.updateButton.setEnabled(true);
+                                    databaseReference.child(Objects.requireNonNull(FirebaseAuth.getInstance().getUid()))
+                                            .child("phone").setValue(binding.updatePhoneNumber.getText().toString());
+                                    user_phoneNo = binding.updatePhoneNumber.getText().toString();
+                                }
+                            }
+                        }
 
-                          @Override
-                          public void onCancelled(@NonNull DatabaseError error) {
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError error) {
 
-                          }
-           });
-              return true;
+                        }
+                    });
+            return true;
         } else return false;
     }
 
     private boolean isEmailChanged() {
+        //   binding.updateButton.setEnabled(false);
         if (!user_email.equals(Objects.requireNonNull(binding.updateEmail).getText().toString())) {
             FirebaseAuth mAuth;
             mAuth = FirebaseAuth.getInstance();
             mAuth.fetchSignInMethodsForEmail(binding.updateEmail.getText().toString()).addOnCompleteListener(task -> {
 
                 //  Log.d(TAG,""+task.getResult().getSignInMethods().size());
-                if (Objects.requireNonNull(Objects.requireNonNull(task.getResult()).getSignInMethods()).size() == 0){
+                if (Objects.requireNonNull(Objects.requireNonNull(task.getResult()).getSignInMethods()).size() == 0) {
                     // email not existed
+                    //  binding.updateButton.setEnabled(true);
                     databaseReference.child(Objects.requireNonNull(FirebaseAuth.getInstance().getUid()))
                             .child("email").setValue(binding.updateEmail.getText().toString());
                     user_password = binding.updateEmail.getText().toString();
 
-                }else {
+                } else {
                     // email existed
                     binding.updateEmail.setError("Email Already Exist");
+                    //    binding.updateButton.setEnabled(false);
                 }
 
             }).addOnFailureListener(Throwable::printStackTrace);
@@ -230,21 +246,23 @@ public class UserActivity extends AppCompatActivity {
 
     private boolean isPasswordChanged() {
         if (!user_password.equals(Objects.requireNonNull(binding.updatePassword).getText().toString())) {
+            // binding.updateButton.setEnabled(true);
             databaseReference.child(Objects.requireNonNull(FirebaseAuth.getInstance().getUid()))
                     .child("password").setValue(binding.updatePassword.getText().toString());
             user_password = binding.updatePassword.getText().toString();
-            return  true;
-        } else  return false;
+            return true;
+        } else return false;
 
     }
 
     private boolean isNameChanged() {
         if (!user_name.equals(Objects.requireNonNull(binding.updateUserName).getText().toString())) {
+            //   binding.updateButton.setEnabled(true);
             databaseReference.child(Objects.requireNonNull(FirebaseAuth.getInstance().getUid()))
                     .child("userName").setValue(binding.updateUserName.getText().toString());
             user_name = binding.updateUserName.getText().toString();
-            return  true;
-        } else  return false;
+            return true;
+        } else return false;
     }
 
 

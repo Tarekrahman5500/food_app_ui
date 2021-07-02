@@ -7,7 +7,11 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 import com.example.foodorderui.Adapter.PopularAdapter;
 import com.example.foodorderui.Domain.FoodDomain;
+import com.example.foodorderui.MainActivity;
 import com.example.foodorderui.databinding.ActivityPizzaBinding;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
 import java.util.Objects;
@@ -15,6 +19,9 @@ import java.util.Objects;
 public class PizzaActivity extends AppCompatActivity {
     ActivityPizzaBinding binding;
     private RecyclerView.Adapter adapter;
+    FirebaseDatabase database;
+    DatabaseReference databaseReference;
+    FirebaseAuth auth;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -22,6 +29,10 @@ public class PizzaActivity extends AppCompatActivity {
         binding = ActivityPizzaBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         Objects.requireNonNull(getSupportActionBar()).hide();
+        database = FirebaseDatabase.getInstance();
+        auth = FirebaseAuth.getInstance();
+        databaseReference = FirebaseDatabase.getInstance().getReference("users");
+
 
         recyclerViewCategoryList();
     }

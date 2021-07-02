@@ -11,6 +11,9 @@ import com.example.foodorderui.Helper.ManagementCard;
 import com.example.foodorderui.Interface.ChangeNumberItemListener;
 import com.example.foodorderui.MainActivity;
 import com.example.foodorderui.databinding.ActivityCardListBinding;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.Objects;
 
@@ -18,6 +21,9 @@ public class CardListActivity extends AppCompatActivity {
     private RecyclerView.Adapter adapter;
     private ManagementCard managementCard;
     ActivityCardListBinding binding;
+    FirebaseDatabase database;
+    DatabaseReference databaseReference;
+    FirebaseAuth auth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,8 +31,11 @@ public class CardListActivity extends AppCompatActivity {
         binding = ActivityCardListBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         Objects.requireNonNull(getSupportActionBar()).hide();
-
+        database = FirebaseDatabase.getInstance();
+        auth = FirebaseAuth.getInstance();
+        databaseReference = FirebaseDatabase.getInstance().getReference("users");
         managementCard = new ManagementCard(this);
+
 
         initList();
         calculatedCard();
