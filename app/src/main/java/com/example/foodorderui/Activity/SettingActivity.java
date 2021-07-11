@@ -70,6 +70,10 @@ public class SettingActivity extends AppCompatActivity {
 
         ShowAdminPanel(databaseReference2, binding.bottomCard, this);
 
+        // change the color or userList and FoodList icon when switch position
+        Methods.ChangeLoginSignUPColor(binding.users, binding.foods, binding.userListScrollView, binding.foodListScrollView, this);
+        Methods.ChangeLoginSignUPColor(binding.foods, binding.users, binding.foodListScrollView, binding.userListScrollView, this);
+
         //   binding.ProfileImage.setOnClickListener(v -> image = v.equals(binding.ProfileImage));
        // save the new food
         binding.Save.setOnClickListener(v -> {
