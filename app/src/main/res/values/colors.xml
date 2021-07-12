@@ -13,4 +13,5 @@
     <color name="LogoText">#3d33a8</color>
     <color name="PrimaryColorVariant">#afafaf</color>
     <color name="ItemColor">#6e6e70</color>
+    <color name="FoodColor">#E684AE</color>
 </resources>

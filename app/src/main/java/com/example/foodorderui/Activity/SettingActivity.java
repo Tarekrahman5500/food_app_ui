@@ -132,8 +132,48 @@ public class SettingActivity extends AppCompatActivity {
             }
         });
 
+        // show all pizza
+        Methods.changeOtherColor(binding.allPizza, binding.allBurger, binding.allHotDog, binding.allDrinks, binding.addFoods,
+                binding.allDonats
+            , binding.addPizzaLayout, binding.addBurgerLayout, binding.addHotDogLayout, binding.addDrinkLayout, binding.addFoodsLayout,
+                binding.addDonateLayout , this);
 
+        // show all burger
+
+        Methods.changeOtherColor(binding.allBurger, binding.allPizza, binding.allHotDog, binding.allDrinks, binding.addFoods,
+                binding.allDonats
+                , binding.addBurgerLayout, binding.addPizzaLayout, binding.addHotDogLayout, binding.addDrinkLayout, binding.addFoodsLayout,
+                binding.addDonateLayout, this);
+
+        // show all hotDog
+
+        Methods.changeOtherColor(binding.allHotDog, binding.allPizza, binding.allBurger, binding.allDrinks, binding.addFoods,
+                binding.allDonats
+                , binding.addHotDogLayout, binding.addPizzaLayout, binding.addBurgerLayout, binding.addDrinkLayout, binding.addFoodsLayout,
+                binding.addDonateLayout, this);
+
+        // show all drinks
+
+        Methods.changeOtherColor(binding.allDrinks, binding.allPizza, binding.allHotDog, binding.allBurger, binding.addFoods,
+                binding.allDonats
+                , binding.addDrinkLayout, binding.addPizzaLayout, binding.addHotDogLayout, binding.addBurgerLayout, binding.addFoodsLayout,
+                binding.addDonateLayout, this);
+
+        // show all donate
+
+        Methods.changeOtherColor(binding.allDonats, binding.allPizza, binding.allHotDog, binding.allDrinks, binding.addFoods,
+                binding.allBurger
+                , binding.addDonateLayout, binding.addPizzaLayout, binding.addHotDogLayout, binding.addDrinkLayout, binding.addFoodsLayout,
+                binding.addBurgerLayout, this);
+
+        // show addFoods
+        Methods.changeOtherColor(binding.addFoods, binding.allPizza, binding.allHotDog, binding.allDrinks, binding.allDonats,
+                binding.allBurger
+                , binding.addFoodsLayout, binding.addPizzaLayout, binding.addHotDogLayout, binding.addDrinkLayout, binding.addDonateLayout,
+                binding.addBurgerLayout, this);
     }
+
+
 
     // the save function that save the new food
     public void Save(Uri file) {

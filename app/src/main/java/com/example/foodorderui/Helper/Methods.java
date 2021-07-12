@@ -1,10 +1,12 @@
 package com.example.foodorderui.Helper;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.text.method.HideReturnsTransformationMethod;
 import android.text.method.PasswordTransformationMethod;
 import android.view.View;
 import android.widget.*;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.content.ContextCompat;
 import com.example.foodorderui.R;
 
@@ -137,4 +139,27 @@ public class Methods {
         });
     }
 
+    @SuppressLint({"ResourceType"})
+    public static void changeOtherColor(ImageView p1, ImageView p2, ImageView p3, ImageView p4, ImageView p5,ImageView p6,
+                                        ConstraintLayout l1, ConstraintLayout l2, ConstraintLayout l3,
+                                        ConstraintLayout l4, ConstraintLayout l5, ConstraintLayout l6, Activity activity) {
+
+        p1.setOnClickListener(v -> {
+           // p1.setBackgroundResource( R.drawable.category_background5);
+            p1.setBackgroundColor(ContextCompat.getColor(activity, R.color.white));
+            p2.setBackgroundColor(ContextCompat.getColor(activity, R.color.FoodColor));
+            p3.setBackgroundColor(ContextCompat.getColor(activity, R.color.FoodColor));
+            p4.setBackgroundColor(ContextCompat.getColor(activity, R.color.FoodColor));
+            p5.setBackgroundColor(ContextCompat.getColor(activity, R.color.FoodColor));
+            p6.setBackgroundColor(ContextCompat.getColor(activity, R.color.FoodColor));
+            l1.setVisibility(View.VISIBLE);
+            l2.setVisibility(View.GONE);
+            l3.setVisibility(View.GONE);
+            l4.setVisibility(View.GONE);
+            l5.setVisibility(View.GONE);
+            l6.setVisibility(View.GONE);
+        });
+
+
+    }
 }
