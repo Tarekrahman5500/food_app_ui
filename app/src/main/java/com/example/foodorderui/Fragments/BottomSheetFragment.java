@@ -41,7 +41,7 @@ public class BottomSheetFragment  extends BottomSheetDialogFragment {
         binding.showuserPhone.setText(phone);
         binding.showUserPassword.setText(pass);
         binding.showUserEmail.setText(email);
-        Picasso.get().load(picasso).placeholder(R.drawable.ic_user).into(binding.profileImage);
+        Picasso.get().load(picasso).placeholder(R.drawable.ic_user).into(binding.foodImage);
        return binding.getRoot();
     }
 }

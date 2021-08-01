@@ -51,7 +51,8 @@
                     app:layout_constraintEnd_toEndOf="parent" app:layout_constraintBottom_toBottomOf="parent"
                     android:layout_marginBottom="8dp" app:layout_constraintTop_toTopOf="parent"
                     android:layout_marginTop="10dp" android:textSize="36sp" android:textColor="@color/LogoText"
-                    android:textStyle="bold" android:fontFamily="@font/roboto_medium" android:layout_marginEnd="32dp"/>
+                    android:textStyle="bold" android:fontFamily="@font/roboto_medium" android:layout_marginEnd="32dp"
+                    android:visibility="visible"/>
         </androidx.constraintlayout.widget.ConstraintLayout>
         <ScrollView
                 android:layout_width="match_parent"
@@ -68,7 +69,7 @@
         <ScrollView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:visibility="visible" android:id="@+id/foodListScrollView"
+                android:visibility="gone" android:id="@+id/foodListScrollView"
         >
             <LinearLayout
                     android:orientation="vertical"
@@ -135,7 +136,7 @@
                 <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content" android:layout_marginTop="20dp"
-                        android:id="@+id/addPizzaLayout" android:visibility="gone">
+                        android:id="@+id/addPizzaLayout" android:visibility="visible">
                     <include
                             android:layout_height="wrap_content"
                             android:layout_width="0dp"
@@ -202,7 +203,7 @@
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content" android:visibility="visible"
+                        android:layout_height="wrap_content" android:visibility="gone"
                         android:layout_marginTop="20dp" android:id="@+id/addFoodsLayout">
 
                     <EditText
@@ -258,7 +259,7 @@
                             android:layout_marginTop="32dp"
                             app:layout_constraintEnd_toEndOf="@+id/editTextTextPersonName4"
                             app:layout_constraintStart_toStartOf="@+id/editTextTextPersonName4"
-                            android:inputType="number"/>
+                            android:inputType="numberDecimal"/>
                     <TextView
                             android:text="Save"
                             android:layout_width="0dp"
@@ -268,8 +269,15 @@
                             android:background="@drawable/loginbutton"
                             android:layout_marginEnd="128dp" android:textAlignment="center" android:textSize="30sp"
                             app:layout_constraintHorizontal_bias="0.0"
-                            app:layout_constraintTop_toBottomOf="@+id/ProfileImage" android:layout_marginTop="32dp"
-                            android:textStyle="bold" android:textColor="@color/white" android:gravity="center"/>
+                            android:textStyle="bold" android:textColor="@color/white" android:gravity="center"
+                            android:layout_marginTop="32dp" app:layout_constraintTop_toBottomOf="@+id/spinner"/>
+                    <Spinner
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" android:id="@+id/spinner"
+                            android:layout_marginTop="32dp" app:layout_constraintTop_toBottomOf="@+id/ProfileImage"
+                            app:layout_constraintEnd_toEndOf="parent" app:layout_constraintStart_toStartOf="parent"
+                            android:layout_marginBottom="4dp" app:layout_constraintBottom_toTopOf="@+id/Save"
+                            android:layout_marginEnd="8dp" android:layout_marginStart="8dp"/>
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </LinearLayout>
         </ScrollView>

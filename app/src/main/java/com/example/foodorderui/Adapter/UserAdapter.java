@@ -1,7 +1,6 @@
 package com.example.foodorderui.Adapter;
 
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,15 +15,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.foodorderui.Fragments.BottomSheetFragment;
 import com.example.foodorderui.R;
 import com.example.foodorderui.Model.UserModel;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
-import java.util.Objects;
 
 public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
 
@@ -42,7 +35,7 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        // call the xmy layout
+        // call the xml layout
         View view = LayoutInflater.from(context).inflate(R.layout.sample_show_user, parent, false);
         return new ViewHolder(view);
     }
@@ -92,7 +85,7 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
-            imageView = itemView.findViewById(R.id.profile_image);
+            imageView = itemView.findViewById(R.id.food_image);
             userName = itemView.findViewById(R.id.userName);
 
         }
